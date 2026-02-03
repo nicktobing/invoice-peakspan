@@ -1,0 +1,19 @@
+{
+  "name": "consultant-invoice-calculator",
+  "version": "1.0.0",
+  "description": "Calculate monthly invoices from Stripe and Go High Level consultations",
+  "main": "api/index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev",
+    "build": "echo 'No build step required'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "axios": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

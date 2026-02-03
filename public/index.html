@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Calculator | PeakSpan Health</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand-logo">
+        <img src="https://cdn.prod.website-files.com/66963aa2dc97dce0bee1fb19/6696486e3d0e9b3ac1b9b4d6_peak%20span%20logo.png" alt="PeakSpan Health" class="logo-img" onerror="this.style.display='none'">
+      </div>
+      <h1>Invoice Calculator</h1>
+      <p class="subtitle">Monthly consultation tracking from Stripe & Go High Level</p>
+    </header>
+
+    <!-- Month Selector -->
+    <section class="month-selector">
+      <button id="prevMonth" class="btn btn-secondary">&larr; Previous</button>
+      <div class="current-month">
+        <select id="monthSelect"></select>
+        <select id="yearSelect"></select>
+      </div>
+      <button id="nextMonth" class="btn btn-secondary">Next &rarr;</button>
+    </section>
+
+    <!-- Summary Cards -->
+    <section class="summary-cards">
+      <div class="card">
+        <h3>Total Consultations</h3>
+        <p class="card-value" id="totalConsultations">0</p>
+      </div>
+      <div class="card">
+        <h3>Approved</h3>
+        <p class="card-value approved" id="approvedCount">0</p>
+      </div>
+      <div class="card">
+        <h3>Pending</h3>
+        <p class="card-value pending" id="pendingCount">0</p>
+      </div>
+      <div class="card">
+        <h3>Rejected</h3>
+        <p class="card-value rejected" id="rejectedCount">0</p>
+      </div>
+      <div class="card highlight">
+        <h3>Invoice Total</h3>
+        <p class="card-value" id="invoiceTotal">$0.00</p>
+      </div>
+    </section>
+
+    <!-- Service Breakdown -->
+    <section class="service-breakdown">
+      <h2>Service Breakdown</h2>
+      <table id="serviceTable">
+        <thead>
+          <tr>
+            <th>Service Type</th>
+            <th>Rate</th>
+            <th>Count</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="serviceTableBody">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Consultations Table -->
+    <section class="consultations">
+      <div class="consultations-header">
+        <h2>Consultations</h2>
+        <div class="filter-controls">
+          <select id="statusFilter">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <select id="sourceFilter">
+            <option value="all">All Sources</option>
+            <option value="stripe">Stripe</option>
+            <option value="gohighlevel">Go High Level</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bulk-actions">
+        <button id="approveAll" class="btn btn-approve">Approve All Pending</button>
+        <button id="rejectAll" class="btn btn-reject">Reject All Pending</button>
+      </div>
+
+      <table id="consultationsTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Patient</th>
+            <th>Service Type</th>
+            <th>Source</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="consultationsTableBody">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+
+      <div id="loadingState" class="loading">
+        <div class="spinner"></div>
+        <p>Loading consultations...</p>
+      </div>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <p>No consultations found for this period.</p>
+      </div>
+    </section>
+
+    <!-- Export Section -->
+    <section class="export-section">
+      <h2>Export Invoice</h2>
+      <button id="exportCSV" class="btn btn-primary">Export to CSV</button>
+      <button id="printSummary" class="btn btn-secondary">Print Summary</button>
+    </section>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

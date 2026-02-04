@@ -120,18 +120,22 @@ async function loadConsultations() {
     const response = await fetch(`/api/consultations?year=${currentYear}&month=${currentMonth}`);
     const data = await response.json();
 
+    console.log('API Response:', data);
+
     if (data.success) {
       consultations = data.consultations;
       applyStoredApprovals();
       updateUI();
     } else {
+      console.error('API Error:', data.error);
       showError(data.error || 'Failed to load consultations');
+      consultations = [];
+      updateUI();
     }
   } catch (error) {
     console.error('Error loading consultations:', error);
-    // For demo purposes, show mock data if API fails
-    consultations = getMockData();
-    applyStoredApprovals();
+    showError('Failed to connect to API: ' + error.message);
+    consultations = [];
     updateUI();
   }
 
